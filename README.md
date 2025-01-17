@@ -30,7 +30,7 @@ API использует Swagger для документации и поддер
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone https://github.com/yourusername/cryptowatcher-api.git
+   git clone https://github.com/miorlan/cryptowatcher-api.git
    cd cryptowatcher-api
 2. **Установите зависимости:**
     ```bash 
