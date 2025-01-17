@@ -34,10 +34,10 @@ API использует Swagger для документации и поддер
    cd cryptowatcher-api
 2. **Установите зависимости:**
     ```bash 
-    npm install
+    go mod download
 3. **Запустите сервер:**
     ```bash   
-    npm start
+    go run cmd/server/main.go
 
 4. **Документация API:**
     После запуска сервера документация будет доступна по адресу:  
