@@ -1,0 +1,128 @@
+basePath: /api/v1
+definitions:
+  model.CurrencyRequest:
+    properties:
+      coin:
+        description: Название валюты.
+        type: string
+    type: object
+  model.GetPriceRequest:
+    properties:
+      coin:
+        description: Название валюты.
+        type: string
+      timestamp:
+        description: Временная метка (timestamp) записи.
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API для отслеживания стоимости криптовалют.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: CryptoWatcher API
+  version: "1.0"
+paths:
+  /currency/add:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новую валюту для отслеживания.
+      parameters:
+      - description: Данные для добавления валюты
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CurrencyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Успешный ответ" example({"message": "Currency added"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Неверный запрос
+          schema:
+            type: string
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            type: string
+      summary: Добавить валюту
+      tags:
+      - currency
+  /currency/price:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает цену валюты на указанный timestamp.
+      parameters:
+      - description: Данные для получения цены
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.GetPriceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Успешный ответ" example({"price": 97675})'
+          schema:
+            additionalProperties:
+              type: number
+            type: object
+        "400":
+          description: Неверный запрос
+          schema:
+            type: string
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            type: string
+      summary: Получить цену валюты
+      tags:
+      - currency
+  /currency/remove:
+    post:
+      consumes:
+      - application/json
+      description: Удаляет валюту из списка отслеживаемых.
+      parameters:
+      - description: Данные для удаления валюты
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.CurrencyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Успешный ответ" example({"message": "Currency removed"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Неверный запрос
+          schema:
+            type: string
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            type: string
+      summary: Удалить валюту
+      tags:
+      - currency
+swagger: "2.0"
